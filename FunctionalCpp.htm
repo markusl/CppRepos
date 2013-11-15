@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en"> 
+    <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title>Functional C++</title>    
+	<meta name="description" content="">
+	<meta name="viewport" content="width=1024, user-scalable=no">
+
+	<!-- Core and extension CSS files -->
+	<link rel="stylesheet" href="css/deck.core.css">
+	<link rel="stylesheet" href="css/deck.goto.css">
+	<link rel="stylesheet" href="css/deck.menu.css">
+	<link rel="stylesheet" href="css/deck.navigation.css">
+	<link rel="stylesheet" href="css/deck.status.css">
+	<link rel="stylesheet" href="css/deck.hash.css">
+	
+	<link href="js/css" rel="stylesheet" type="text/css.css">        
+	<link href="js/css(1)" rel="stylesheet" type="text/css">
+
+	<!-- Theme CSS files -->
+	<link rel="stylesheet" id="style-theme-link" href="css/swiss.css">
+	<link rel="stylesheet" id="transition-theme-link" href="css/horizontal-slide.css">
+	
+	<script src="js/modernizr.custom.js"></script><style type="text/css"></style>
+	<link type="text/css" rel="stylesheet" href="css/shCoreDefault.css">
+	
+	<!-- Custom CSS just for this page -->        
+	<link rel="stylesheet" href="css/tekla.css"> 
+</head>
+<body class="deck-container">
+
+<section class="slide">
+	<h1>Functional C++</h1>
+	<div class="title-page">
+		<p></p>
+		<table width="100%">
+		  <colgroup>
+			<col width="1*">
+			<col width="1*">
+		  </colgroup>
+		<tbody>
+			<tr><td>
+			Markus Lindqvist<br>
+			09.11.2013<br>
+			<a href="http://tekla.com">Tekla</a></td>
+			<td><p align="right">
+			markus.lindqvist@tekla.com<br>
+			</p></td></tr>
+			</tbody>
+		</table>
+	</div>
+</section>
+
+<section class="slide">
+	<h2>Content</h2>
+	<ul>
+		<li><h5>Const-correctness</h5>
+			<ul>
+				<li>What is it</li>
+				<li>What to do</li>
+				<li>What not to do</li>
+			</ul>
+		</li>
+		<li><h5>Standard algorithms</h5>
+			<ul>
+				<li>map/std::transform</li>
+				<li>filter/std::remove_if</li>
+				<li>zip</li>
+				<li>fold/std::accumulate</li>
+			</ul>
+		</li>
+	</ul>
+</section>
+
+<section class="slide">
+	<h2>Const-correctness</h2>
+	<ul>
+		<li><h5>Do</h5>
+			<ul>
+				<li>Make function parameters const</li>
+				<li>Make all class methods const</li>
+				<li>Make class members const in data classes</li>
+				<li>Make local values const</li>
+			</ul>
+		</li>
+		<li><h5>Don't</h5>
+			<ul>
+				<li>Create classes with side effects and mutable state</li>
+				<li>Reuse local variables</li>
+				<li>Use (non-const) reference/pointer parameters in functions</li>
+				<li>Use global (static) non-const values</li>
+			</ul>
+		</li>
+	</ul>
+</section>
+
+<section class="slide">
+	<h2>How to not use classes</h2>
+	
+<h5>Don't decorate classes with setter methods</h5>
+<pre class="brush: c++">
+class dontdothis {
+public:
+    std::string str1;
+    int increment;
+
+    void set_str(std::string str) { str1 = str; }
+};
+</pre>
+
+<h5>Don't reuse classes</h5>
+<pre class="brush: c++">
+void operate_with_dontdothis(dontdothis value) {
+    // do something
+}
+
+void dontdothis_example() {
+    dontdothis value{ "content 1", 12 };
+    operate_with_dontdothis(value);
+
+    value.set_str("second content");
+    operate_with_dontdothis(value);
+}
+</pre>
+</section>
+
+<section class="slide">
+	<h2>Using const in data class</h2>
+<pre class="brush: c++">
+class person
+{
+public:
+    const std::string first_name;
+    const std::string last_name;
+
+    person with_first_name(std::string first) const
+    {
+        return{ first, last_name };
+    }
+};
+</pre>
+<h5>Usage examples</h5>
+<pre class="brush: c++">
+    person p{ "markus", "lindqvist" };
+    person a = p;
+    person c = a.with_first_name("mikael");
+    p = a; // does not compile
+</pre>
+<pre class="brush: c++">
+Error	1	error C2582: 'operator =' function is unavailable in 'person'
+</pre>
+</section>
+
+<section class="slide">
+	<h2>Complex initialization for a const variable</h2>
+<pre class="brush: c++">
+
+void initializing_const(const bool really_random)
+{
+    const auto get_random = []() {
+        static std::mt19937 rnd(static_cast&lt;unsigned int>(std::time(0)));
+        return static_cast&lt;int>(rnd());
+    };
+
+    const int value = [&]() {
+        if(really_random)
+            return 42;
+        return get_random();
+    }();
+
+    std::cout &lt;&lt; "random: " &lt;&lt; value &lt;&lt; "\n";
+}
+</pre>
+<h5>Herb Sutter's blog</h5>
+	<ul>
+		<li><a href="http://herbsutter.com/2013/04/05/complex-initialization-for-a-const-variable/">Complex initialization for a const variable</a></li>
+	</ul>
+</section>
+
+<section class="slide">
+	<h2>map, fold, filter, zip, ...</h2>
+	<table style="width: 100%">
+		<colgroup>
+			<col width="33%" /><col width="33%" /><col width="33%" />
+		</colgroup>
+		<tr>
+		<td valign="top"><!-- Other input -->
+			<div class="overview">
+				<h4>map</h4>
+				<ul>
+					<li>C++: std::<a href="http://www.cplusplus.com/reference/algorithm/transform/">transform</a>(begin, end, result, func)</li>
+					<li>C#: IEnumerable.Select(func)</li>
+					<li>F#: List.map func list</li>
+					<li>Scala: list.map(func)</li>
+				</ul>
+			</div>
+			<div style="height: 10px"></div>
+			<div class="overview">
+			<h4>fold</h4>
+			<ul>
+				<li>C++: std::<a href="http://www.cplusplus.com/reference/numeric/accumulate/">accumulate</a>(begin, end, initval, func)</li>
+				<li>C#: IEnumerable.Aggregate(initval, func)</li>
+				<li>F#: Seq.fold func initval list</li>
+				<li>Scala: list.foldLeft(initval)(func) (initval /: list)(func)</li>
+			</ul>
+			</div>
+			</td>
+			<td valign="top"><!-- Standard -->
+			<div style="height: 80px">
+			</div>
+			<div class="overview">
+			<h4>filter</h4>
+			<ul>
+				<li>C++: std::<a href="http://www.cplusplus.com/reference/algorithm/copy_if/">copy_if</a>(begin, end, result, pred), std::<a href="http://www.cplusplus.com/reference/algorithm/remove_if/">remove_if</a>(begin, end, pred)</li>
+				<li>C#: IEnumerable.Where(pred)</li>
+				<li>F#: Seq.filter pred list</li>
+				<li>Scala: list.filter(pred)</li>
+			</ul>
+			</div>
+			<div></div>
+			<div class="overview">
+			<h4>zip</h4>
+			<ul>
+				<li>C++: std::<a href="http://www.cplusplus.com/reference/algorithm/transform/">transform</a>(begin1, end1, begin2, result, func)</li>
+				<li>C#: IEnumerable.Zip(ienum2, func)</li>
+				<li>F#: List.zip list1 list2 |> List.map</li>
+				<li>Scala: (list1, list2).zipped.map(func)	</li>
+			</ul>
+			</div>
+			</td>
+			<td valign="top"><!-- Inspiration -->
+			<div class="overview">
+			<h4>Other C++ algorithms</h4>
+			<ul>
+			 <li><a href="http://www.cplusplus.com/reference/algorithm/all_of/">all_of</a>, <a href="http://www.cplusplus.com/reference/algorithm/any_of/">any_of</a>, ...</li>
+			 <li><a href="http://www.cplusplus.com/reference/algorithm/find/">find</a>, <a href="http://www.cplusplus.com/reference/algorithm/find_if/">find_if</a>, ...</li>
+			 <li><a href="http://www.cplusplus.com/reference/algorithm/sort/">sort</a>, <a href="http://www.cplusplus.com/reference/algorithm/count_if/">count_if</a>, ...</li>
+			 <li><a href="http://www.cplusplus.com/reference/algorithm/fill/">fill</a>, <a href="http://www.cplusplus.com/reference/algorithm/generate/">generate</a>, <a href="http://www.cplusplus.com/reference/algorithm/rotate/">rotate</a>, ...</li>
+			 <li>More from <a href="http://www.cplusplus.com/reference/algorithm/">&lt;algorithm></a></li>
+			</ul>
+			</div>
+			</td>
+		</tr>
+	</table>
+</section>
+
+<section class="slide">
+	<h2>First-class functions</h2>
+	<img src="img/first-class-functions.png" alt="" />
+	<ul>
+		<li>Source: <a href="http://meetingcpp.com/tl_files/mcpp/slides/12/FunctionalProgrammingInC++11.pdf">Functional Programming in C++11</a> (Rainer Grimm)</li>
+	</ul>
+</section>
+
+<section class="slide">
+<h2>Standard algorithms map/transform</h2>
+<pre class="brush: c++">
+// Easier usage of std::transform
+template&lt;typename Ty, typename F>
+auto map(std::vector&lt;Ty> vector, F func) -> std::vector&lt;decltype(func(Ty()))>
+{
+    std::vector&lt;decltype(func(Ty()))> result(vector.size());
+    std::transform(vector.begin(), vector.end(), begin(result), func);
+    return result;
+}
+
+#define var const auto // don't really do this
+
+var to_string = static_cast&lt;std::string(*)(int)>(std::to_string); // select overload
+var numbers = std::vector&lt;int>({ 99, 88, 22, 34, 11 });
+</pre>
+<h5>C++03</h5>
+<pre class="brush: c++">
+    std::vector&lt;std::string> strings1;
+    for(size_t ii = 0; ii &lt; numbers.size(); ++ii)
+        strings1.push_back(custom_to_string(numbers.at(ii)));
+</pre>
+<h5>C++11</h5>
+<pre class="brush: c++">
+    var strings2 = map(numbers, to_string);
+</pre>
+<pre class="brush: c++">
+    assert(strings1 == strings2);
+</pre>
+</section>
+
+<section class="slide">
+<h2>Standard algorithms filter/remove_if</h2>
+<pre class="brush: c++">
+// Easier usage of std::remove_if
+template&lt;typename Ty, typename F>
+std::vector&lt;Ty> filter(std::vector&lt;Ty> vector, F func)
+{
+    vector.erase(std::remove_if(vector.begin(), vector.end(),
+                               std::not1(std::function&lt;bool (Ty)>(func))),
+                 vector.end());
+    return vector;
+}
+
+#define var const auto // don't really do this
+
+var numbers = std::vector&lt;int>({ 99, 88, 22, 34, 11 });
+</pre>
+<h5>C++03</h5>
+<pre class="brush: c++">
+    std::vector&lt;int> odds1;
+    for(size_t ii = 0; ii &lt; numbers.size(); ++ii)
+    {
+        if(numbers.at(ii) % 2 == 0)
+            odds1.push_back(numbers.at(ii));
+    }
+</pre>
+<h5>C++11</h5>
+<pre class="brush: c++">
+    var is_odd = [](int n) { return n % 2 == 0; };
+    var odds2 = filter(numbers, is_odd);
+</pre>
+<pre class="brush: c++">
+    assert(odds1 == odds2);
+</pre>
+</section>
+
+<!-- next slide -->
+<section class="slide">
+<h2>Standard algorithms: zip</h2>
+<pre class="brush: c++">
+template&lt;typename T1, typename T2, typename F>
+auto zip(const std::vector&lt;T1>& first, const std::vector&lt;T2>& second, F func) -> std::vector&lt;decltype(func(T1(), T2()))>
+{
+    assert(first.size() == second.size());
+    std::vector&lt;decltype(func(T1(), T2()))> result(first.size());
+    std::transform(first.begin(), first.end(), second.begin(),
+        result.begin(), func);
+    return result;
+}
+</pre>
+<h5>C++11</h5>
+<pre class="brush: c++">
+var numbers = std::vector&lt;int>({ 99, 88, 22, 34, 11 });
+var strings = std::vector&lt;std::string>({ "99", "88", "22", "34", "11" });
+
+var zipped = zip(numbers, strings, do_pair&lt;int, std::string>);
+
+for(var &item : zipped)
+	std::cout &lt;&lt; item.first &lt;&lt; " - " &lt;&lt; item.second << "\n";
+</pre>
+<h5>Output</h5>
+<pre class="brush: c++">
+99 - 99
+88 - 88
+22 - 22
+34 - 34
+11 - 11
+</pre>
+</section>
+
+<section class="slide">
+	<h2>Questions & discussion</h2>
+</section>
+        
+        <a href="#" class="deck-prev-link" title="Previous">&#8592;</a>
+        <a href="#" class="deck-next-link" title="Next">&#8594;</a>
+        
+        <p class="deck-status">
+            <span class="deck-status-current"></span>/<span class="deck-status-total"></span>
+        </p>
+        
+        <form action="." method="get" class="goto-form">
+            <label for="goto-slide">Go to slide:</label>
+            <input type="number" name="slidenum" id="goto-slide">
+            <input type="submit" value="Go">
+        </form>
+        
+        <a href="." title="Permalink to this slide" class="deck-permalink">#</a>
+        
+        <script src="js/jquery-1.7.2.min.js"></script>
+        <script>window.jQuery</script>
+        
+        <script type="text/javascript" src="js/syntaxhighlighter_3.0.83/scripts/shCore.js"></script>
+        <script type="text/javascript" src="js/syntaxhighlighter_3.0.83/scripts/shBrushJScript.js"></script>
+        <script type="text/javascript" src="js/syntaxhighlighter_3.0.83/scripts/shBrushCpp.js"></script>        
+        <script type="text/javascript">SyntaxHighlighter.all();</script>
+        
+        <!-- Deck Core and extensions -->
+        <script src="js/deck.core.js"></script>
+        <script src="js/deck.menu.js"></script>
+        <script src="js/deck.goto.js"></script>
+        <script src="js/deck.status.js"></script>
+        <script src="js/deck.navigation.js"></script>
+        <script src="js/deck.hash.js"></script>
+        
+        <script type="text/javascript">        
+            $(function() {
+                // Deck initialization
+                $.deck('.slide');
+                $('#style-themes').change(function() {
+                    $('#style-theme-link').attr('href', $(this).val());
+                });
+                $('#transition-themes').change(function() {
+                    $('#transition-theme-link').attr('href', $(this).val());
+                });
+                $('pre').click(function (){
+                    $(this).toggleClass('highlighted');
+                });
+            });
+        </script>
+	</body>
+</html>

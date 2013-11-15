@@ -1,0 +1,85 @@
+﻿@charset "UTF-8";
+
+.deck-container .overview {
+  font-size: 80%;
+  border: 1px;
+  border-style: solid;
+  margin: 20px 10px;
+  padding: 20px;
+}
+
+.deck-container .slide {
+  font-family: 'PT Sans', sans-serif;
+}
+
+.deck-container .slide h1 {
+  color: rgb(225, 14, 73); /* Tekla Red */
+  border-bottom-color: #31B6E7;
+
+  font-weight: normal;
+  font-family: 'Rotis Sans Serif', sans-serif;
+}
+
+.deck-container .slide h2 {
+  color: rgb(225, 14, 73); /* Tekla Red */
+  border-bottom-color: #ccc;
+
+  font-weight: normal;
+  font-family: 'Rotis Sans Serif', sans-serif;
+}
+
+.deck-container .slide h3,
+.deck-container .slide h4,
+.deck-container .slide h5 {
+  color: rgb(0, 51, 141); /* Tekla Blue */
+
+  font-weight: 700;
+  font-family: 'Rotis Sans Serif', sans-serif;
+  padding-left: 40px;
+}
+
+
+.deck-container .slide p,
+.deck-container .slide ul,
+.deck-container .slide ol
+ {
+  padding-left: 40px;
+}
+
+.slide li
+ {
+  list-style-image: url('../img/arrow-right.png');
+}
+
+.table-solid table, .table-solid  td, .table-solid  th {
+  border: solid;
+  border-color: rgb(154, 155, 156); /* Tekla Gray */
+  text-align:left;
+  border-width: 1px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.deck-container blockquote p  {
+font-size: 50%;
+font-style: normal;
+}
+
+.deck-container blockquote h5  {
+font-size: 50%;
+font-style: normal;
+}
+
+.deck-container blockquote small {
+  font-size: 40%;
+  color: #999999;
+  padding-left: 10px;
+}
+
+.on-slide-0 .title-page{
+    top: 70%;
+    width: 80%;
+    position: absolute;
+}
+
+
