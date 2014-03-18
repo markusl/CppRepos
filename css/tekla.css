@@ -46,9 +46,31 @@
   padding-left: 40px;
 }
 
-.slide li
+.slide ul li
  {
   list-style-image: url('../img/arrow-right.png');
+}
+
+.slide ol
+ {
+    counter-reset: item;
+}
+.slide ol li
+ {
+    list-style: none;
+    display: block;
+}
+.slide ol li:before {
+  content: counter(item) ". ";
+  counter-increment: item;
+  display: block;
+  position: relative;
+  max-width: 0px;
+  max-height: 0px;
+  left: -50px;
+  top: -0px;
+  color: rgb(225, 14, 73); /* Tekla Red */
+  font-weight: bold;
 }
 
 .table-solid table, .table-solid  td, .table-solid  th {

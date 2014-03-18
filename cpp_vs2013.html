@@ -60,20 +60,19 @@
 		<li><h5>Introduction to C++ history</h5></li>
 	</ul>
 	<ul>
-		<li><h5>New features of C++11</h5>
+		<li><h5>New features of C++11 in VS2013</h5>
 			<ul>
 				<li>Uniform initialization</li>
 				<li>Range-based for</li>
 				<li>Enum class</li>
 				<li>Delegating constructor</li>
+				<li>final, override, default, delete</li>
 				<li>STL algorithms</li>
-				<li>Other cool features!</li>
 			</ul>
 		</li>
-		<li><h5>Modern C++</h5>
+		<li><h5>Modern C++ (VS2010/VS2012)</h5>
 			<ul>
 				<li>auto</li>
-				<li>range-based for</li>
 				<li>Pointer usage</li>
 				<li>Algorithm usage</li>
 			</ul>
@@ -113,6 +112,11 @@
 	<h2>Visual Studio C++11/C++14 support</h2>
 	<img src="img/Updated_Conformance_Map.png" alt="" />
     <a href="http://blogs.msdn.com/b/vcblog/archive/2013/11/18/announcing-the-visual-c-compiler-november-2013-ctp.aspx">Announcing the Visual C++ Compiler November 2013 CTP</a>
+</section>
+
+<!-- next slide -->
+<section class="slide">
+	<h1>New features of C++11 in VS2013</h1>
 </section>
 
 <!-- next slide -->
@@ -303,7 +307,7 @@
     };
     </pre>
 	<ul>
-		<li><a href="http://en.cppreference.com/w/cpp/language/final">Source</li>
+		<li><a href="http://en.cppreference.com/w/cpp/language/final">Source</a></li>
 	</ul>
 </section>
 
@@ -354,7 +358,7 @@
     </pre>
 
 	<ul>
-		<li><a href="http://msdn.microsoft.com/en-us/library/dn457344.aspx">Source</li>
+		<li><a href="http://msdn.microsoft.com/en-us/library/dn457344.aspx">Source</a></li>
 	</ul>
 </section>
 
@@ -383,25 +387,124 @@
 
 <!-- next slide -->
 <section class="slide">
-<h2>auto</h2>
-<h5>C++98</h5>
-<pre class="brush: c++">
-map&lt;int,string>::iterator i = m.begin();
-double const xlimit = config["xlimit"];
-singleton& s = singleton::instance();
-binder2nd< greater > x = bind2nd( greater(), 42 );
-</pre>
-<h5>C++11</h5>
-<pre class="brush: c++">
-auto i = begin(m);
-auto const xlimit = config["xlimit"];
-auto& s = singleton::instance();
-auto x = [](int i) { return i > 42; };
-</pre>
-<a href="http://herbsutter.com/elements-of-modern-c-style/">Source</a>
+                
+	<h1>More about modern C++
+	<ul>
+		<li style="font-size:large">Supported in Visual Studio 2010, Visual Studio 2012</li>
+	</ul></h1>
+</section>
+
+<!-- next slide -->
+<section class="slide">
+    <h2>auto</h2>
+    <h5>C++98</h5>
+    <pre class="brush: c++">
+        map&lt;int,string>::iterator i = m.begin();
+        double const xlimit = config["xlimit"];
+        singleton& s = singleton::instance();
+        binder2nd< greater > x = bind2nd( greater(), 42 );
+    </pre>
+    <h5>C++11</h5>
+    <pre class="brush: c++">
+        auto i = begin(m);
+        auto const xlimit = config["xlimit"];
+        auto& s = singleton::instance();
+        auto x = [](int i) { return i > 42; };
+    </pre>
+    <a href="http://herbsutter.com/elements-of-modern-c-style/">Source</a>
 
 </section>
 
+<!-- next slide -->
+<section class="slide">
+    <h2>Pointer usage</h2>
+    <h5>Do not use pointers, allocate on stack</h5>
+    <p></p>
+    <h5>If you <em>absolutely</em> have to, the preferred order is:</h5>
+    <ol>
+        <li>Stack allocation</li>
+        <li><a href="http://en.cppreference.com/w/cpp/memory/unique_ptr">std::unique_ptr</a> (boost::scoped_ptr)</li>
+        <li><a href="http://en.cppreference.com/w/cpp/memory/shared_ptr">std::shared_ptr</a></li>
+        <li>(<a href="http://www.boost.org/doc/libs/1_55_0/libs/smart_ptr/intrusive_ptr.html">boost::intrusive_ptr</a>)</li>
+        <li>Framework specific pointer classes</li>
+        <li>Never use: Raw pointers</li>
+    </ol>
+</section>
+
+<!-- next slide -->
+<section class="slide">
+    <h2>Pointer usage</h2>
+    <h5>Do this</h5>
+    <pre class="brush: c++">
+        std::string MyString("foo bar baz");
+        const extrema_t Extrema = { Vector_c(-1800.0, -500.0, -250.0),
+                                    Vector_c( 1800.0,  500.0,  250.0) };
+        
+        // if you absolutely have to
+        auto pMyString = std::make_unique&lt;std::string>("foo bar baz");
+        std::make_unique&lt;extrema_t> pExtrema(new extrema_t{ Vector_c(-1800.0, -500.0, -250.0),
+                                                            Vector_c( 1800.0,  500.0,  250.0) });
+    </pre>
+    <h5>Get a team architect approval for doing this</h5>
+    <pre class="brush: c++">
+        auto pMyString = std::make_shared&lt;std::string>("foo bar baz");
+    </pre>
+    <h5>Never do this</h5>
+    <pre class="brush: c++">        
+        std::string *pMyString = new std::string("foo bar baz");
+    </pre>
+</section>
+
+<!-- next slide -->
+<section class="slide">
+    <h2>String to int, String to double conversion</h2>
+    <h5>Locale makes a difference</h5>
+    <pre class="brush: c++">
+    std::locale::global(std::locale("finnish"));
+
+    assert(std::stoi("100,200") == 100);
+    assert(std::stoi("100.200") == 100);
+    assert(std::stoi("100 200") == 100.0);
+
+    assert(std::stod("100,200") == 100.200);
+    assert(std::stod("100.200") == 100.0);
+    assert(std::stod("100 200") == 100.0);
+
+    std::locale::global(std::locale("japanese"));
+
+    assert(std::stoi("100,200") == 100);
+    assert(std::stoi("100.200") == 100);
+    assert(std::stoi("100 200") == 100.0);
+
+    assert(std::stod("100,200") == 100.0); // difference
+    assert(std::stod("100.200") == 100.200); // difference
+    assert(std::stod("100 200") == 100.0);
+    </pre>
+</section>
+
+<!-- next slide -->
+<section class="slide">
+    <h2>Number to string conversion</h2>
+    <h5>Locale makes a difference</h5>
+    <pre class="brush: c++">
+    std::locale::global(std::locale("finnish"));
+
+    assert(std::to_string(100.200) == "100,200000"); // difference
+    assert(std::to_string(100) == "100");
+
+    std::locale::global(std::locale("japanese"));
+
+    assert(std::to_string(100.200) == "100.200000"); // difference
+    assert(std::to_string(100) == "100");
+    </pre>
+</section>
+
+<!-- next slide -->
+<section class="slide">
+    <img src="img/STLcontainerChoices.png" alt="" />
+    <p>Selecting a C++ container. <a href="http://www.cim.mcgill.ca/~mpersson/cxx_diagrams.html">Source</a></p>
+</section>
+    
 <section class="slide">
 	<h2>Questions & discussion</h2>
 </section>
