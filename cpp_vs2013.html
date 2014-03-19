@@ -385,13 +385,33 @@
     </ul>
 </section>
 
-<!-- next slide -->
 <section class="slide">
-                
-    <h1>More about modern C++
+<h2>Other algorithm examples</h2>
+<pre class="brush: c++">
+    std::vector&lt;std::string&gt; Container1 = { "banana", "apple", "orange", "ananas" };
+    
+    assert(Container1.end() != std::find_if(Container1.begin(), Container1.end(), 
+                                            [](const std::string &Value) { return Value == "banana"; }));
+
+    std::vector&lt;int&gt Container2 = { 1, 2, 3, 5, 6, 7 };
+    assert(Container2.end() != std::adjacent_find(Container2.begin(), Container2.end(),
+                                                  [](int L, int R) { return 2 == R - L; }));
+
+    std::vector&lt;int&gt Container3 = { 1, 2, 3, 2, 3, 4, 3, 4, 5, 4, 5, 6 };
+    auto EndIt = std::partition(Container3.begin(), Container3.end(), 
+                                [](int Value) { return Value == 3; });
+                                
+    std::vector&lt;int&gt Threes{ Container3.begin(), EndIt };
+    
+    std::vector&lt;int&gt Container4 = {1,1,2,3,5,8,13,21,34};
+    std::vector&lt;double&gt Ratios(Container4.size());
+    std::adjacent_difference(Container4.begin(), Container4.end(), Ratios.begin(),
+                             [](int L, int R){return double(L) / R; });
+
+</pre>
     <ul>
-        <li style="font-size:large">Supported in Visual Studio 2010, Visual Studio 2012</li>
-    </ul></h1>
+        <li>See <a href="http://www.cplusplus.com/reference/algorithm/">&lt;algorithm&gt;</a> and <a href="http://www.cplusplus.com/reference/numeric/">&lt;numeric&gt;</a>reference</li>
+    </ul>
 </section>
 
 <!-- next slide -->
@@ -503,6 +523,15 @@
 <section class="slide">
     <img src="img/STLcontainerChoices.png" alt="" />
     <p>Selecting a C++ container. <a href="http://www.cim.mcgill.ca/~mpersson/cxx_diagrams.html">Source</a></p>
+</section>
+
+<section class="slide">
+    <h2>Other new features</h2>
+    <ul>
+    <li>Time library, <a href="http://www.cplusplus.com/reference/chrono/">&lt;chrono&gt;</a></li>
+    <li>Random number generation, <a href="http://www.cplusplus.com/reference/random/">&lt;random&gt;</a></li>
+    <li>Multi-threading, <a href="http://www.cplusplus.com/reference/thread/">&lt;thread&gt;</a> etc.</li>
+    </ul>
 </section>
     
 <section class="slide">
