@@ -1,158 +1,160 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en"> 
     <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-	<title>C++11 new features</title>    
-	<meta name="description" content="">
-	<meta name="viewport" content="width=1024, user-scalable=no">
+    <title>C++11 new features</title>    
+    <meta name="description" content="">
+    <meta name="viewport" content="width=1024, user-scalable=no">
 
-	<!-- Core and extension CSS files -->
-	<link rel="stylesheet" href="css/deck.core.css">
-	<link rel="stylesheet" href="css/deck.goto.css">
-	<link rel="stylesheet" href="css/deck.menu.css">
-	<link rel="stylesheet" href="css/deck.navigation.css">
-	<link rel="stylesheet" href="css/deck.status.css">
-	<link rel="stylesheet" href="css/deck.hash.css">
-	
-	<link href="js/css" rel="stylesheet" type="text/css.css">        
-	<link href="js/css(1)" rel="stylesheet" type="text/css">
+    <!-- Core and extension CSS files -->
+    <link rel="stylesheet" href="css/deck.core.css">
+    <link rel="stylesheet" href="css/deck.goto.css">
+    <link rel="stylesheet" href="css/deck.menu.css">
+    <link rel="stylesheet" href="css/deck.navigation.css">
+    <link rel="stylesheet" href="css/deck.status.css">
+    <link rel="stylesheet" href="css/deck.hash.css">
+    
+    <link href="js/css" rel="stylesheet" type="text/css.css">        
+    <link href="js/css(1)" rel="stylesheet" type="text/css">
 
-	<!-- Theme CSS files -->
-	<link rel="stylesheet" id="style-theme-link" href="css/swiss.css">
-	<link rel="stylesheet" id="transition-theme-link" href="css/horizontal-slide.css">
-	
-	<script src="js/modernizr.custom.js"></script><style type="text/css"></style>
-	<link type="text/css" rel="stylesheet" href="css/shCoreDefault.css">
-	
-	<!-- Custom CSS just for this page -->        
-	<link rel="stylesheet" href="css/tekla.css"> 
+    <!-- Theme CSS files -->
+    <link rel="stylesheet" id="style-theme-link" href="css/swiss.css">
+    <link rel="stylesheet" id="transition-theme-link" href="css/horizontal-slide.css">
+    
+    <script src="js/modernizr.custom.js"></script><style type="text/css"></style>
+    <link type="text/css" rel="stylesheet" href="css/shCoreDefault.css">
+    
+    <!-- Custom CSS just for this page -->        
+    <link rel="stylesheet" href="css/tekla.css"> 
 </head>
 <body class="deck-container">
 
 <section class="slide">
-	<h1>C++11 new features</h1>
-	<div class="title-page">
-		<p></p>
-		<table width="100%">
-		  <colgroup>
-			<col width="1*">
-			<col width="1*">
-		  </colgroup>
-		<tbody>
-			<tr><td>
-			Markus Lindqvist<br>
-			19.3.2014<br>
-			<a href="http://tekla.com">Tekla</a></td>
-			<td><p align="right">
-			markus.lindqvist@tekla.com<br>
-			</p></td></tr>
-			</tbody>
-		</table>
-	</div>
+    <h1>C++11 new features</h1>
+    <div class="title-page">
+        <p></p>
+        <table width="100%">
+          <colgroup>
+            <col width="1*">
+            <col width="1*">
+          </colgroup>
+        <tbody>
+            <tr><td>
+            Markus Lindqvist<br>
+            19.3.2014<br>
+            <a href="http://tekla.com">Tekla</a></td>
+            <td><p align="right">
+            markus.lindqvist@tekla.com<br>
+            </p></td></tr>
+            </tbody>
+        </table>
+    </div>
 </section>
 
 <section class="slide">
-	<h2>Content</h2>
-	<ul>
-		<li><h5>Introduction to C++ history</h5></li>
-	</ul>
-	<ul>
-		<li><h5>New features of C++11 in VS2013</h5>
-			<ul>
-				<li>Uniform initialization</li>
-				<li>Range-based for</li>
-				<li>Enum class</li>
-				<li>Delegating constructor</li>
-				<li>final, override, default, delete</li>
-				<li>STL algorithms</li>
-			</ul>
-		</li>
-		<li><h5>Modern C++ (VS2010/VS2012)</h5>
-			<ul>
-				<li>auto</li>
-				<li>Pointer usage</li>
-				<li>Algorithm usage</li>
-			</ul>
-		</li>
-	</ul>
+    <h2>Content</h2>
+    <ul>
+        <li><h5>Introduction to C++ history</h5></li>
+    </ul>
+    <ul>
+        <li><h5>New features of C++11 in VS2013</h5>
+            <ul>
+                <li>Uniform initialization</li>
+                <li>Range-based for</li>
+                <li>Enum class</li>
+                <li>Delegating constructor</li>
+                <li>final, override, default, delete</li>
+                <li>STL algorithms</li>
+            </ul>
+        </li>
+        <li><h5>Modern C++ (VS2010/VS2012)</h5>
+            <ul>
+                <li>auto</li>
+                <li>Pointer usage</li>
+                <li>Algorithm usage</li>
+            </ul>
+        </li>
+    </ul>
 </section>
 
 <!-- next slide -->
 <section class="slide">
-	<h2>C++ history</h2>
-	<table style="width: 100%">
-		<colgroup>
-			<col width="50%" /><col width="50%" />
-		</colgroup>
-		<tr>
-		<td valign="top"><!-- Other input -->
-			<ul>
-				<li>1979 - "C with Classes"</li>
-				<li>1983 - Language named to "C++"</li>
-				<li>1998 - C++98 (ISO/IEC 14882:1998)</li>
-				<li>2003 - C++03 (ISO/IEC 14882:2003)</li>
-				<li>2007 - C++TR1 (ISO/IEC TR 19768:2007)</li>
-				<li><strong>2011 - C++11 (ISO/IEC 14882:2011)</strong></li>
-				<li>201x - C++14</li>
-				<li>201x - C++17</li>
-			</ul>
-		</td>
-		<td valign="top"><!-- Other input -->
-			<img src="img/cpp_evolution.jpg" alt="" />
-		</td>
-	</table>
+    <h2>C++ history</h2>
+    <table style="width: 100%">
+        <colgroup>
+            <col width="50%" /><col width="50%" />
+        </colgroup>
+        <tr>
+        <td valign="top"><!-- Other input -->
+            <ul>
+                <li>1979 - "C with Classes"</li>
+                <li>1983 - Language named to "C++"</li>
+                <li>1998 - C++98 (ISO/IEC 14882:1998)</li>
+                <li>2003 - C++03 (ISO/IEC 14882:2003)</li>
+                <li>2007 - C++TR1 (ISO/IEC TR 19768:2007)</li>
+                <li><strong>2011 - C++11 (ISO/IEC 14882:2011)</strong></li>
+                <li>201x - C++14</li>
+                <li>201x - C++17</li>
+            </ul>
+        </td>
+        <td valign="top"><!-- Other input -->
+            <img src="img/cpp_evolution.jpg" alt="" />
+        </td>
+    </table>
     <a href="http://isocpp.org/std/status">http://isocpp.org/std/status</a>
 </section>
 
 <!-- next slide -->
 <section class="slide">
-	<h2>Visual Studio C++11/C++14 support</h2>
-	<img src="img/Updated_Conformance_Map.png" alt="" />
+    <h2>Visual Studio C++11/C++14 support</h2>
+    <img src="img/Updated_Conformance_Map.png" alt="" />
     <a href="http://blogs.msdn.com/b/vcblog/archive/2013/11/18/announcing-the-visual-c-compiler-november-2013-ctp.aspx">Announcing the Visual C++ Compiler November 2013 CTP</a>
 </section>
 
 <!-- next slide -->
 <section class="slide">
-	<h1>New features of C++11 in VS2013</h1>
+    <h1>New features of C++11 in VS2013</h1>
 </section>
 
 <!-- next slide -->
 <section class="slide">
-	<h2>Uniform initialization 1/2</h2>
+    <h2>Uniform initialization 1/2</h2>
     <h5>The C++11 solution is to allow {}-initializer lists for <em>all</em> initialization</h5>
-	<pre class="brush: c++">
-    	X x1 = X{1,2}; 
-        X x2 = {1,2}; 	// the = is optional
+    <pre class="brush: c++">
+        X x1 = X{1,2}; 
+        X x2 = {1,2};   // the = is optional
         X x3{1,2}; 
         X* p = new X{1,2}; 
 
         struct D : X {
-            D(int x, int y) :X{x,y} { /* ... */ };
+            D(int x, int y) :X{x,y}
+            { /* ... */ };
         };
 
         struct S {
             int a[3];
-            S(int x, int y, int z) :a{x,y,z} { /* ... */ }; // solution to old problem
+            S(int x, int y, int z) :a{x,y,z} // solution to old problem
+            { /* ... */ };
         };
-	</pre>
+    </pre>
     <h6>Copy-construction</h6>
-	<pre class="brush: c++">
-    	X x{a}; 
+    <pre class="brush: c++">
+        X x{a}; 
         X* p = new X{a};
         z = X{a};         // use as cast
         f({a});           // function argument (of type X)
         return {a};       // function return value (function returning X)
-	</pre>
+    </pre>
     <a href="http://www.stroustrup.com/C++11FAQ.html#uniform-init">Source</a>
 </section>
 <section class="slide">
-	<h2>Uniform initialization 2/2</h2>
+    <h2>Uniform initialization 2/2</h2>
     <h5>Return values</h5>
-	<pre class="brush: c++">
-        virtual std::array&lt;double, 6> GetOffsets() const
+    <pre class="brush: c++">
+        virtual std::array&lt;double, 6&gt; GetOffsets() const
         {
             return{ m_Struct.OffsetXMin, m_Struct.OffsetXMax, m_Struct.OffsetYMin,
                     m_Struct.OffsetYMax, m_Struct.OffsetZMin, m_Struct.OffsetZMax };
@@ -161,79 +163,79 @@
         {
             return{ m_Struct.ReferenceSizeX, m_Struct.ReferenceSizeY, m_Struct.ReferenceSizeZ };
         }
-	</pre>
+    </pre>
     <h5>Function parameters</h5>
-	<pre class="brush: c++">
-    geometry::IndirectPolygon_t CreateIndirectPolygon(const std::array&lt;int, 4> &aIndices)
+    <pre class="brush: c++">
+    geometry::IndirectPolygon_t CreateIndirectPolygon(const std::array&lt;int, 4&gt; &aIndices)
     {
         return{ aIndices.begin(), aIndices.end() };
     }
     
     const auto IndirectPolygon = CreateIndirectPolygon({ { 0, 1, 2, 3 } });
-	</pre>
+    </pre>
     <a href="http://www.stroustrup.com/C++11FAQ.html#uniform-init">Source</a>
 </section>
 <!-- next slide -->
 <section class="slide">
-	<h2>Range-based for loop</h2>
-	<h5>C++98</h5>
-	<pre class="brush: c++">
-	for(vector&lt;int>::iterator it = Container.begin(); it != Container.end(); ++it) {
-	    Total += *it;
-	}
-	</pre>
-	<h5>C++11</h5>
-	<pre class="brush: c++">
-	// Preferred, constant reference
-	for(const auto &Value : Container) {
-	    Total += Value;
-	}
+    <h2>Range-based for loop</h2>
+    <h5>C++98</h5>
+    <pre class="brush: c++">
+    for(vector&lt;int&gt;::iterator it = Container.begin(); it != Container.end(); ++it) {
+        Total += *it;
+    }
+    </pre>
+    <h5>C++11</h5>
+    <pre class="brush: c++">
+    // Preferred, constant reference
+    for(const auto &Value : Container) {
+        Total += Value;
+    }
 
-	// Work on copy
-	for(auto Value : Container) {
-	    Total += Value;
-	}
+    // Work on copy
+    for(auto Value : Container) {
+        Total += Value;
+    }
 
-	// Work on reference, modify in-place
-	for(auto &Value : Container) {
-	    Value += 2.0;
-	}
-	</pre>
+    // Work on reference, modify in-place
+    for(auto &Value : Container) {
+        Value += 2.0;
+    }
+    </pre>
 </section>
 
 <section class="slide">
-	<h2>Enum class - scoped and strongly typed enums</h2>
-	<pre class="brush: c++">
-		enum Alert { green, yellow, orange, red }; // traditional enum
+    <h2>Enum class - scoped and strongly typed enums</h2>
+    <pre class="brush: c++">
+        enum Alert { green, yellow, orange, red }; // traditional enum
 
-		enum class Color { red, blue };   // scoped and strongly typed enum
-										  // no export of enumerator names into enclosing scope
-										  // no implicit conversion to int
-		enum class TrafficLight { red, yellow, green };
+        enum class Color { red, blue };   // scoped and strongly typed enum
+                                          // no export of enumerator names into enclosing scope
+                                          // no implicit conversion to int
+        enum class TrafficLight { red, yellow, green };
 
-		Alert a = 7;              // error (as ever in C++)
-		Color c = 7;              // error: no int->Color conversion
+        Alert a = 7;              // error (as ever in C++)
+        Color c = 7;              // error: no int->Color conversion
 
-		int a2 = red;             // ok: Alert->int conversion
-		int a3 = Alert::red;      // error in C++98; ok in C++11
-		int a4 = blue;            // error: blue not in scope
-		int a5 = Color::blue;     // error: not Color->int conversion
+        int a2 = red;             // ok: Alert->int conversion
+        int a3 = Alert::red;      // error in C++98; ok in C++11
+        int a4 = blue;            // error: blue not in scope
+        int a5 = Color::blue;     // error: not Color->int conversion
 
-		Color a6 = Color::blue;   // ok
+        Color a6 = Color::blue;   // ok
 
-	</pre>
-	
-	<h5><a href="http://www.stroustrup.com/C++11FAQ.html#enum">Source</a></h5>
+    </pre>
+    
+    <h5><a href="http://www.stroustrup.com/C++11FAQ.html#enum">Source</a></h5>
 </section>
 
 <section class="slide">
-	<h2>Delegating constructor</h2>
-	<table style="width: 100%">
-		<colgroup>
-			<col width="50%" /><col width="50%" />
-		</colgroup>
-		<tr>
-		<td valign="top">
+    <h2>Delegating constructor</h2>
+    <table style="width: 100%">
+        <colgroup>
+            <col width="50%" /><col width="50%" />
+        </colgroup>
+        <tr>
+        <td valign="top">
             <pre class="brush: c++">
             class A{
             public:
@@ -271,25 +273,23 @@
                  A(0) { }
                A(int i):
                  A(i, 0) { }
-               A(int i, int j) {
-                  num1 = i;
-                  num2 = j;
+               A(int i, int j) : num1(i), num2(j) {
                   average = (num1+num2) / 2;
                }
             private:
-               int num1;
-               int num2;
+               const int num1;
+               const int num2;
                int average;
             };
 
             </pre>
             <h5><a href="https://www.ibm.com/developerworks/community/blogs/5894415f-be62-4bc0-81c5-3956e82276f3/entry/introduction_to_the_c_11_feature_delegating_constructors?lang=en">Source</a></h5>
-		</td>
-	</table>
+        </td>
+    </table>
 </section>
 
 <section class="slide">
-	<h2>final</h2>
+    <h2>final</h2>
     <pre class="brush: c++">
     struct A
     {
@@ -306,13 +306,13 @@
     {
     };
     </pre>
-	<ul>
-		<li><a href="http://en.cppreference.com/w/cpp/language/final">Source</a></li>
-	</ul>
+    <ul>
+        <li><a href="http://en.cppreference.com/w/cpp/language/final">Source</a></li>
+    </ul>
 </section>
 
 <section class="slide">
-	<h2>override</h2>
+    <h2>override</h2>
     <pre class="brush: c++">
     struct A
     {
@@ -328,13 +328,13 @@
         void bar() override; // Error: B::bar is not virtual
     };
     </pre>
-	<ul>
-		<li><a href="http://en.cppreference.com/w/cpp/language/override">Source</a></li>
-	</ul>
+    <ul>
+        <li><a href="http://en.cppreference.com/w/cpp/language/override">Source</a></li>
+    </ul>
 </section>
 
 <section class="slide">
-	<h2>default & delete</h2>
+    <h2>default & delete</h2>
     <h5>Deleting methods</h5>
     <pre class="brush: c++">
     // C++11 version of noncopyable
@@ -357,19 +357,19 @@
     inline widget& widget::operator=(const widget&) = default;
     </pre>
 
-	<ul>
-		<li><a href="http://msdn.microsoft.com/en-us/library/dn457344.aspx">Source</a></li>
-	</ul>
+    <ul>
+        <li><a href="http://msdn.microsoft.com/en-us/library/dn457344.aspx">Source</a></li>
+    </ul>
 </section>
 
 <section class="slide">
 <h2>New algorithms</h2>
-	<ul>
-		<li>all_of, any_of, none_of, find_if_not, copy_if, copy_n</li>
+    <ul>
+        <li>all_of, any_of, none_of, find_if_not, copy_if, copy_n</li>
         <li>uninitialized_copy_n, move, move_backward, is_partitioned, partition_copy, partition_point etc...</li>
-	</ul>
+    </ul>
 <pre class="brush: c++">
-    std::vector&lt;std::string> Container1 = { "banana", "apple", "orange", "ananas" };
+    std::vector&lt;std::string&gt; Container1 = { "banana", "apple", "orange", "ananas" };
 
     assert(std::all_of(Container1.begin(), Container1.end(),
         [](std::string Value) { return Value != "pineapple"; }));
@@ -380,18 +380,18 @@
     assert(std::none_of(Container1.begin(), Container1.end(),
         [](std::string Value) { return Value == "pineapple"; }));
 </pre>
-	<ul>
-		<li>See <a href="http://www.cplusplus.com/reference/algorithm/">&lt;algorithm></a> reference</li>
-	</ul>
+    <ul>
+        <li>See <a href="http://www.cplusplus.com/reference/algorithm/">&lt;algorithm&gt;</a> reference</li>
+    </ul>
 </section>
 
 <!-- next slide -->
 <section class="slide">
                 
-	<h1>More about modern C++
-	<ul>
-		<li style="font-size:large">Supported in Visual Studio 2010, Visual Studio 2012</li>
-	</ul></h1>
+    <h1>More about modern C++
+    <ul>
+        <li style="font-size:large">Supported in Visual Studio 2010, Visual Studio 2012</li>
+    </ul></h1>
 </section>
 
 <!-- next slide -->
@@ -399,7 +399,7 @@
     <h2>auto</h2>
     <h5>C++98</h5>
     <pre class="brush: c++">
-        map&lt;int,string>::iterator i = m.begin();
+        map&lt;int,string&gt;::iterator i = m.begin();
         double const xlimit = config["xlimit"];
         singleton& s = singleton::instance();
         binder2nd< greater > x = bind2nd( greater(), 42 );
@@ -423,7 +423,7 @@
     <h5>If you <em>absolutely</em> have to, the preferred order is:</h5>
     <ol>
         <li>Stack allocation</li>
-        <li><a href="http://en.cppreference.com/w/cpp/memory/unique_ptr">std::unique_ptr</a> (boost::scoped_ptr)</li>
+        <li><a href="http://en.cppreference.com/w/cpp/memory/unique_ptr">std::unique_ptr</a></li>
         <li><a href="http://en.cppreference.com/w/cpp/memory/shared_ptr">std::shared_ptr</a></li>
         <li>(<a href="http://www.boost.org/doc/libs/1_55_0/libs/smart_ptr/intrusive_ptr.html">boost::intrusive_ptr</a>)</li>
         <li>Framework specific pointer classes</li>
@@ -441,13 +441,13 @@
                                     Vector_c( 1800.0,  500.0,  250.0) };
         
         // if you absolutely have to
-        auto pMyString = std::make_unique&lt;std::string>("foo bar baz");
-        std::make_unique&lt;extrema_t> pExtrema(new extrema_t{ Vector_c(-1800.0, -500.0, -250.0),
-                                                            Vector_c( 1800.0,  500.0,  250.0) });
+        auto StringPtr = std::unique_ptr&lt;std::string&gt;("foo bar baz");
+        auto ExtremaPtr = std::make_unique&lt;extrema_t&gt; (extrema_t{ Vector_c(-1800.0, -500.0, -250.0),
+                                                                  Vector_c( 1800.0,  500.0,  250.0) });
     </pre>
     <h5>Get a team architect approval for doing this</h5>
     <pre class="brush: c++">
-        auto pMyString = std::make_shared&lt;std::string>("foo bar baz");
+        auto pMyString = std::make_shared&lt;std::string&gt;("foo bar baz");
     </pre>
     <h5>Never do this</h5>
     <pre class="brush: c++">        
@@ -489,12 +489,12 @@
     <pre class="brush: c++">
     std::locale::global(std::locale("finnish"));
 
-    assert(std::to_string(100.200) == "100,200000"); // difference
+    assert(std::to_string(1000.200) == "1 000,200000"); // difference
     assert(std::to_string(100) == "100");
 
     std::locale::global(std::locale("japanese"));
 
-    assert(std::to_string(100.200) == "100.200000"); // difference
+    assert(std::to_string(1000.200) == "1,000.200000"); // difference
     assert(std::to_string(100) == "100");
     </pre>
 </section>
@@ -506,7 +506,7 @@
 </section>
     
 <section class="slide">
-	<h2>Questions & discussion</h2>
+    <h2>Questions & discussion</h2>
 </section>
         
         <a href="#" class="deck-prev-link" title="Previous">&#8592;</a>
@@ -555,5 +555,5 @@
                 });
             });
         </script>
-	</body>
+    </body>
 </html>

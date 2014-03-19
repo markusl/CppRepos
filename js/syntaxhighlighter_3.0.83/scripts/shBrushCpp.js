@@ -84,7 +84,8 @@
 						'reserve push_back begin end cbegin cend  crbegin crend insert ' +
 						'assign erase remove shrink_to_fit find_if front min max minmax minmax_element ' +
 						'stoi what at back data size fill make_tuple tie ' +
-						'bucket_count max_bucket_count bucket_size bucket load_factor max_load_factor max_load_factor rehash ';
+						'bucket_count max_bucket_count bucket_size bucket load_factor max_load_factor max_load_factor rehash ' +
+                        'make_shared make_unique';
 
 		this.regexList = [
 			{ regex: SyntaxHighlighter.regexLib.singleLineCComments,	css: 'comments' },			// one line comments
